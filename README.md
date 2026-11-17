@@ -60,13 +60,13 @@ sub = Subscription(
     current_period_end=datetime(2025, 7, 1, tzinfo=timezone.utc),
 )
 
-can_access(sub, "api_access", now).allowed          # True  (pro entitles it)
-can_access(sub, "sso", now).reason                  # 'feature_not_in_plan'
+can_access(sub, "api_access", now).allowed  # True  (pro entitles it)
+can_access(sub, "sso", now).reason  # 'feature_not_in_plan'
 within_limit(sub, "seats", current_usage=4).allowed  # True  (cap 5, +1 == 5)
-within_limit(sub, "seats", current_usage=5).reason   # 'limit_exceeded'
+within_limit(sub, "seats", current_usage=5).reason  # 'limit_exceeded'
 
 enterprise = sub.with_plan(get_plan("enterprise"))
-can_access(enterprise, "sso", now).allowed           # True  (upgrade unlocks it)
+can_access(enterprise, "sso", now).allowed  # True  (upgrade unlocks it)
 ```
 
 ## Architecture
